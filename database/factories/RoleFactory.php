@@ -1,0 +1,30 @@
+<?php
+namespace Database\Factories;
+
+use AgenterLab\IAM\Models\Role;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class RoleFactory extends Factory
+{
+    
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Role::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'title' => $this->faker->realText(20),
+            'is_system' => $this->faker->boolean ? 1 : 0,
+            'is_default' => $this->faker->boolean ? 1 : 0,
+        ];
+    }
+}

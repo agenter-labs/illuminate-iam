@@ -1,0 +1,48 @@
+{
+    "name": "agenter-labs/illuminate-iam",
+    "description": "Auth checker for Laravel",
+    "keywords": [
+        "laravel",
+        "auth",
+        "checker"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Abdulla",
+            "email": "dev@agenter.com",
+            "homepage": "https://agenter.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.3|^8.0",
+        "agenter-labs/illuminate-database": "^0.0.1",
+        "agenter-labs/illuminate-uid": "^0.0.1",
+        "agenter-labs/illuminate-gate": "^0.0.2"
+    },
+    "require-dev": {
+        "laravel/lumen-framework": "^8.0",
+        "fakerphp/faker": "^1.16",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AgenterLab\\IAM\\": "./src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AgenterLab\\IAM\\IamServiceProvider"
+            ]
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Database\\Factories\\": "database/factories/"
+        }
+    },
+    "prefer-stable": true
+}
