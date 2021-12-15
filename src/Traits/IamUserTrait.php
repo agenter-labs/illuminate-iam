@@ -55,7 +55,7 @@ trait IamUserTrait
             Config::get('iam.tables.user_company'),
             Config::get('iam.foreign_keys.user'),
             Config::get('iam.foreign_keys.company')
-        );
+        )->withPivot('user_type', 'active', 'is_default', 'invitation_send_at', 'invitation_accepted_at');
     }
 
     /**

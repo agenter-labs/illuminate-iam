@@ -43,6 +43,5 @@
             "Tests\\": "tests/",
             "Database\\Factories\\": "database/factories/"
         }
-    },
-    "prefer-stable": true
+    }
 }

@@ -14,6 +14,13 @@ class Role extends Model implements IamRoleInterface
     use AuthUser, SoftDeletes, ModelTrait, IamRoleTrait;
 
     /**
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'U';
+    
+    /**
      * Indicates if the IDs are auto-incrementing.
      *
      * @var bool
@@ -26,7 +33,7 @@ class Role extends Model implements IamRoleInterface
      * @var array
      */
     protected $fillable = [
-        'company_id', 'is_default','is_system', 'title', 'description'
+        'company_id', 'is_default','is_system', 'title', 'description', 'name'
     ];
 
     /**
@@ -35,6 +42,7 @@ class Role extends Model implements IamRoleInterface
      * @var array
      */
     protected $attributes = [
+        'name' => '',
         'description' => '',
         'created_by' => 0,
         'updated_by' => 0,

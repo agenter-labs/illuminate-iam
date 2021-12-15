@@ -119,7 +119,7 @@ trait IamRoleTrait
     {
         $permission = Helper::getIdFor($permission, 'permission');
 
-        $this->permissions()->attach($permission);
+        $this->permissions()->syncWithoutDetaching([$permission]);
         $this->flushCache();
 
         return $this;

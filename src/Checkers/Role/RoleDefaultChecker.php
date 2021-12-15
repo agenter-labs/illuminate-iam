@@ -71,6 +71,6 @@ class RoleDefaultChecker extends RoleChecker
      */
     public function flushCache()
     {
-        Cache::forget('iam_permissions_for_role_'.$this->role->getKey());
+        Cache::store(Config::get('iam.cache.store', 'file'))->forget('iam_permissions_for_role_'.$this->role->getKey());
     }
 }

@@ -107,6 +107,6 @@ class UserDefaultChecker extends UserChecker
             $cacheKey .= '_' . $company;
         }
 
-        Cache::forget($cacheKey);
+        Cache::store(Config::get('iam.cache.store', 'file'))->forget($cacheKey);
     }
 }

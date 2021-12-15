@@ -1,16 +1,25 @@
 <?php
 
 namespace AgenterLab\IAM\Models;
+
 use AgenterLab\Database\AuthUser;
 use AgenterLab\Database\SoftDeletes;
 use AgenterLab\Uid\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Config;
+use AgenterLab\IAM\Traits\IamCompanyTrait;
 
 class Company extends Model
 {
-    use AuthUser, SoftDeletes, ModelTrait;
+    use AuthUser, SoftDeletes, ModelTrait, IamCompanyTrait;
 
+    /**
+     * The storage format of the model's date columns.
+     *
+     * @var string
+     */
+    protected $dateFormat = 'U';
+    
     /**
      * Indicates if the IDs are auto-incrementing.
      *

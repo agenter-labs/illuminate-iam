@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Config;
 
-class CoreV1 extends Migration
+class CreateIamTables extends Migration
 {
 
     /**
@@ -49,6 +49,7 @@ class CoreV1 extends Migration
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('company_id')->index()->default(0);
             $table->string('title', 50);
+            $table->string('name', 50);
             $table->string('description', 100);
             $table->unsignedTinyInteger('is_default')->default(0)->index();
             $table->unsignedTinyInteger('is_system')->default(0)->index();
@@ -69,8 +70,10 @@ class CoreV1 extends Migration
             $table->string('user_type', 20)->default('user');
             $table->unsignedTinyInteger('active')->default(1)->index();
             $table->unsignedTinyInteger('is_default')->default(0)->index();
+            $table->unsignedTinyInteger('invitation_send_at')->default(0);
+            $table->unsignedTinyInteger('invitation_accepted_at')->default(0);
+            $table->unsignedBigInteger('created_at');
             $table->primary(['user_id', 'company_id']);
-            $table->timestamps();
         });
         
 		Schema::create(Config::get('iam.tables.user_role'), function (Blueprint $table) {

@@ -10,9 +10,20 @@ use AgenterLab\IAM\Contracts\IamUserInterface;
 use AgenterLab\IAM\Contracts\IamRoleInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphPivot;
+use Illuminate\Support\Str;
 
 class Helper
 {
+    /**
+     * Permission map
+     */
+    public static $permissionMap = [
+        'c' => 'create',
+        'r' => 'read',
+        'u' => 'update',
+        'd' => 'delete'
+    ];
+
     /**
      * Gets the it from an array, object or integer.
      *
@@ -117,4 +128,89 @@ class Helper
     {
         return Config::get('iam.foreign_keys.role');
     }
+
+    /**
+     * Returns companies by user.
+     *
+     * @return string
+     */
+    public static function userCompanies(IamUserInterface $user)
+    {
+        $roles = $user->roles()->withPivot('company_id')->select('title')->get()->groupBy('pivot.company_id')->map(function($roles){
+            return $roles->map(function($role){
+                return ['id' => $role->pivot->role_id, 'title' => $role->title];
+            });
+        });
+
+        $companies = $user->companies->map(function($company) use ($roles) {
+            $company->roles = $roles[$company->pivot->company_id] ?? [];
+            return $company;
+        });
+
+        return $companies;
+    }
+
+    /**
+     * Returns roles by user.
+     *
+     * @return string
+     */
+    public static function userRoles(IamUserInterface $user, int $company)
+    {
+        $user->roles()->wherePivot('company_id', $company)->select('title')->get()->map(function($roles){
+            return $roles->map(function($role){
+                return ['id' => $role->pivot->role_id, 'title' => $role->title];
+            });
+        });
+        
+        return $user;
+    }
+
+    /**
+     * Load permission form modules
+     * 
+     * @param array $modules
+     * @param array $permissions
+     * 
+     * @return array
+     */
+    public static function loadPermissions(array $modules, array $permissions = []) {
+
+        $sorted = [];
+
+
+        foreach ($modules as $module) {
+            $resource = include resource_path('permissions/' . $module . '.php');
+
+            foreach($resource['groups'] as $gName => $group) {
+
+                $sorted[$gName] = $sorted[$gName] ?? ['title' => Str::headline($group['title']), 'permissions' => []];
+
+                foreach($group['items'] as $item) {
+
+                    $permission = $resource['permissions'][$item] ?? '';
+
+                    if (!$permission) {
+                        continue;
+                    }
+
+                    foreach (explode(',', $permission) as $perm) {
+                        $_perm = (self::$permissionMap[$perm] ?? $prem) . '-' . $item;
+                        $sorted[$gName]['permissions'][] = [
+                            'name' => $_perm,
+                            'title' => Str::headline($_perm),
+                            'selected' => in_array($_perm, $permissions)
+                        ];
+                    }
+                }
+
+                
+            }
+        }
+
+        return array_values($sorted);
+        
+    }
+
 }
+

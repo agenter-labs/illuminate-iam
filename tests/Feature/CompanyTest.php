@@ -13,7 +13,5 @@ class CompanyTest extends TestCase
         $this->loginAs();
         $company = CompanyFactory::new()->create();
         $this->seeInDatabase('company', ['name' => $company['name']]);
-
-        app('iam');
     }
 }

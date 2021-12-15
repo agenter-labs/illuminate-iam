@@ -115,5 +115,15 @@ return [
         */
         'store' => env('IAM_CACHE_STORE', 'file'),
     ],
+
+    /**
+     * Scope
+     */
+    'scope' => [
+        'skip_tables' => [],
+        'column' => 'company_id'
+    ],
+
+    'permissions_as_gates' => false
 ];
 
