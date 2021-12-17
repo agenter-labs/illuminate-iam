@@ -15,7 +15,7 @@ class IamServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {;
+    {
         $this->registerPermissionsToGate();
         
         $root = dirname(__DIR__);
