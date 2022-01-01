@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^7.3|^8.0",
-        "agenter-labs/illuminate-database": "^0.0.1",
+        "agenter-labs/illuminate-database": "^0.0.2",
         "agenter-labs/illuminate-uid": "^0.0.1",
         "agenter-labs/illuminate-gate": "^0.0.2"
     },

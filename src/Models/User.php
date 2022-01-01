@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Foundation\Auth\Access\Authorizable;
+use AgenterLab\IAM\Traits\Authorizable;
 use AgenterLab\IAM\Traits\IamUserTrait;
 use AgenterLab\IAM\Contracts\IamUserInterface;
 
