@@ -16,13 +16,13 @@
         }
     ],
     "require": {
-        "php": "^7.3|^8.0",
-        "agenter-labs/illuminate-database": "^0.0.2",
-        "agenter-labs/illuminate-uid": "^0.0.1",
-        "agenter-labs/illuminate-gate": "^0.0.2"
+        "php": "^8.1",
+        "agenter-labs/illuminate-database": "^1.0",
+        "agenter-labs/illuminate-uid": "^1.0",
+        "agenter-labs/illuminate-gate": "^1.0"
     },
     "require-dev": {
-        "laravel/lumen-framework": "^8.0",
+        "laravel/lumen-framework": "^9.0",
         "fakerphp/faker": "^1.16",
         "phpunit/phpunit": "^9.5"
     },
