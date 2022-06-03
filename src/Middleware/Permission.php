@@ -50,7 +50,7 @@ class Permission
 
         $isGuest = Auth::guard($guard)->guest();
 
-        $companyId = (!$isGuest && $company) ? Auth::guard($guard)->companyId() : null;
+        $companyId = (!$isGuest && $company) ? Auth::guard($guard)->getCompanyId() : null;
 
         return !$isGuest
             && Auth::guard($guard)->user()->hasPermission($permissions, $companyId, $requireAll);
